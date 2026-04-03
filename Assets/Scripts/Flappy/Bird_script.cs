@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
 using UnityEditor;
+using Unity.Collections;
 
 public class Bird_script : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class Bird_script : MonoBehaviour
     public float Flap_str=5f;
     public InputActionReference jump;
     private WaitForSeconds flapDelay = new WaitForSeconds(0.4f);
+    public SoundManager soundManager;
 
     void Awake()
     {
@@ -38,7 +40,6 @@ public class Bird_script : MonoBehaviour
     // Update is called once per frame
     public void OnJump(InputAction.CallbackContext context)
     {   
-        Debug.Log("Jump triggered");
         if (context.performed)
         {
             rigidBody.linearVelocity = new Vector2(rigidBody.linearVelocity.x, Flap_str);
@@ -53,6 +54,7 @@ public class Bird_script : MonoBehaviour
     }
     void Flap() {
         StartCoroutine(FlapRoutine());
+        soundManager.Jump();
     }
 
     IEnumerator FlapRoutine() {
@@ -73,7 +75,15 @@ public class Bird_script : MonoBehaviour
         else if (collision.gameObject.CompareTag("Scoring"))
         {
             //do
-            FindAnyObjectByType<GameManager>().IncreaseScore(collision.gameObject.GetComponent<Score_rew>().rew);
+            float rew=collision.gameObject.GetComponent<Score_rew>().rew;
+            FindAnyObjectByType<GameManager>().IncreaseScore(rew);
+            if (rew > 1) {
+             soundManager.StarPickup2();   
+            }
+            else {
+             soundManager.StarPickup1();   
+            }
+            Destroy(collision.gameObject);
         }
     }
 }
