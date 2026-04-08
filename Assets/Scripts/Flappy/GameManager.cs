@@ -18,7 +18,8 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        Application.targetFrameRate=60;
+        AudioListener.volume = PlayerPrefs.GetFloat("Volume", 1f);
+        Application.targetFrameRate = (int)PlayerPrefs.GetFloat("FPS", 60f);
         playButton.SetActive(true);
         gameOverImg.SetActive(false);
         homeButton.SetActive(false);

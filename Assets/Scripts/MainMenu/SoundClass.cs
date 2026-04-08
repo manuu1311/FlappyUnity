@@ -16,8 +16,6 @@ public class SoundClass : MonoBehaviour
     }
 
     public void PlaySound(AudioClip clip) {
-        Debug.Log("er suono");
         src.PlayOneShot(clip);
-        Debug.Log("Fine");
     }
 }
