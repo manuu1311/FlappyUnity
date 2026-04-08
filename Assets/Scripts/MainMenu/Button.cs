@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Button : MonoBehaviour
+public class Button : MonoBehaviour,IPointerEnterHandler
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public SoundClass audioPlayer;
