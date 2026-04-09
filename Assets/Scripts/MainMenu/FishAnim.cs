@@ -11,7 +11,7 @@ public class FishAnim : MonoBehaviour
     public float yvelocity;
     public float xfirst;
     public float rotation;
-    public float rotationspeed;
+    private float rotationspeed;
     public float scale;
     public ParticleSystem first_splash;
     public ParticleSystem second_splash;
@@ -22,6 +22,10 @@ public class FishAnim : MonoBehaviour
     public float gravity;
     private bool active;
     private RectTransform rt;
+    void Awake() {
+        float time=2*yvelocity / gravity;
+        rotationspeed=-2*rotation/time;
+    }
     void Start()
     {
         rt = GetComponent<RectTransform>();
@@ -47,6 +51,7 @@ public class FishAnim : MonoBehaviour
             rt.anchoredPosition = pos2;
             rotation+=rotationspeed*Time.deltaTime;
             transform.rotation=Quaternion.Euler(0,0,rotation);
+            first_splash.transform.position+=new Vector3(xspeed*Time.deltaTime,0,0);
             if(pos2.y < yfirst){
                 //final state reached
                 active=false;
