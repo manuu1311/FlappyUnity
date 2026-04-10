@@ -21,7 +21,7 @@ public class AnimController : MonoBehaviour
             fish.PlayAnim();
         }
         //anim.SetTrigger("Activate");
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(2.5f);
         gameObject.SetActive(false);
     }
 }

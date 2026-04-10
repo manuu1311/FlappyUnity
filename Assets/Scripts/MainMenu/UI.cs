@@ -8,10 +8,12 @@ public class UI : MonoBehaviour
     public GameObject optionsScreen;
     public SoundClass audioPlayer;
     public AudioClip menuChangeClip;
+    public ParticleSystem particles;
 
     void Start() {
         Application.targetFrameRate=60;
         BackButton(false);
+        particles.Play();
     }
     // play button action
     public void PlayButton() {

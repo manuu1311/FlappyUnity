@@ -52,6 +52,7 @@ public class Fish : MonoBehaviour
             if(pos3.y < ylast){
                 //final state reached
                 active=false;
+                transform.rotation=Quaternion.Euler(0,0,0);
                 second_splash.Play();
                 soundManager.SecondSplash();
                 GetComponent<SpriteRenderer>().enabled = false;
