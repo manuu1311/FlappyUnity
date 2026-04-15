@@ -1,8 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
-using UnityEditor;
-using Unity.Collections;
 using Unity.Mathematics;
 
 public class Bird_script : MonoBehaviour
@@ -18,14 +16,28 @@ public class Bird_script : MonoBehaviour
     private WaitForSeconds flapDelay = new WaitForSeconds(0.4f);
     public SoundManager soundManager;
     public GameManager gameManager;
-    private bool paused;
-    private float health=1f;
+    public bool paused;
+    private float health=0.5f;
     public float helathdecay=0.05f;
-
+    //public Animator fadeController;
+    public float scale;
+    //lerp time to reach final size, health size scale
+    public float healthWarpTime;
+    public bool active=true;
+    public float fadeTimeDeath;
+    public float fadeTimeSpawn;
+    private Material material;
+    private SpriteRenderer rend;
+    private Coroutine fadeCoroutine;
+    public AnimationCurve scaleCurve;
     void Awake()
     {
+        rend=gameObject.GetComponent<SpriteRenderer>();
+        material = Instantiate(rend.material);
+        rend.material = material;
         rightWing = transform.Find("birdwingright").GetComponent<SpriteRenderer>();
         leftWing = transform.Find("birdwingleft").GetComponent<SpriteRenderer>();
+        ResetBird();
     }
 
     private void OnEnable()
@@ -48,9 +60,11 @@ public class Bird_script : MonoBehaviour
     {   
         if (context.performed)
         {
+            if(!paused){
             rigidBody.linearVelocity = new Vector2(rigidBody.linearVelocity.x, Flap_str);
             Flap();
             SpawnCloud();
+            }
         }
     }
 
@@ -122,16 +136,30 @@ public class Bird_script : MonoBehaviour
     }
 
     void Update() {
+        if(active){
         //health decay overtime
         health-=helathdecay*Time.deltaTime;
         if (health < 0f) {
             GameOver();
         }
+        float tempScale=CalculateScale()*scale;
+        Vector3 currentScale = transform.localScale;
+        Vector3 newScale = new Vector3(tempScale, tempScale, 1);
+
+        // Smooth transition
+        transform.localScale = Vector3.Lerp(currentScale, newScale, Time.deltaTime * healthWarpTime);
+        //gameObject.transform.localScale=new Vector3(tempScale,tempScale,1);
+        }
+        else {
+            //rigidBody.simulated = false;;
+        }
     }
 
     public void ResetBird() {
         //reset bird variables
-        health=1f;
+        health=0.5f;
+        float tempScale=CalculateScale()*scale;
+        transform.localScale=new Vector3(tempScale,tempScale,1);
         Vector3 pos=transform.position;
         pos.y=-1.5f;
         transform.position=pos;
@@ -145,6 +173,54 @@ public class Bird_script : MonoBehaviour
     private void Heal(float amount) {
         health+=amount;
         health=math.min(health,1f);
+    }
+
+    public void Fade() {
+        if (fadeCoroutine != null)
+            StopCoroutine(fadeCoroutine);
+        fadeCoroutine = StartCoroutine(Fader(-1,fadeTimeDeath));
+    }
+    public void FadeSpawn() {
+        if (fadeCoroutine != null)
+            StopCoroutine(fadeCoroutine);
+        fadeCoroutine = StartCoroutine(Fader(1,fadeTimeSpawn));
+    }
+    IEnumerator Fader(int sign, float duration) {
+        // sign: 1 = fade 0 -> 1
+        //       -1 = fade 1 -> 0
+
+        float start = (sign >= 0) ? 0f : 1f;
+        float end   = (sign >= 0) ? 1f : 0f;
+
+        float t = 0f;
+    
+        // set initial value
+        material.SetFloat("_Fade", start);
+
+        while (t < duration)
+        {
+            Debug.Log("Coroutine running on: " + gameObject.name);
+            t += Time.unscaledDeltaTime;
+
+            float normalized = Mathf.Clamp01(t / duration);
+            float value = Mathf.Lerp(start, end, normalized);
+
+            rend.material.SetFloat("_Fade", value);
+            rightWing.material.SetFloat("_Fade", value);
+            leftWing.material.SetFloat("_Fade", value);
+
+            yield return new WaitForEndOfFrame();
+        }
+
+        // ensure final value is exact
+        rend.material.SetFloat("_Fade", end);
+        rightWing.material.SetFloat("_Fade", end);
+        leftWing.material.SetFloat("_Fade", end);
+    }
+
+    private float CalculateScale() {
+        float scaleValue = scaleCurve.Evaluate(health);
+        return scaleValue;
     }
 }
 

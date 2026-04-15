@@ -13,8 +13,13 @@ public class GameManager : MonoBehaviour
     public Bird_script bird;
     public SoundManager soundManager;
     public GameObject homeButton;
-    public ParticleSystem explosion;
+    public ExplosionManager explosion;
     public Image healthbar;
+    //flag to see if this is the very beginning (for respawn)
+    private bool firstSpawn;
+    //speed of items
+    public static float pipeSpeed=5f;
+    public static float jumpCloudSpeed=6f;
 
     private void Awake()
     {
@@ -24,36 +29,17 @@ public class GameManager : MonoBehaviour
         gameOverImg.SetActive(false);
         homeButton.SetActive(false);
         Pause();
+        firstSpawn=true;
     }
 
     public void Play()
     {
-        Score=0;
-        score.text=Score.ToString();
-
-        bird.gameObject.SetActive(true);
-        gameOverImg.SetActive(false);
-        playButton.SetActive(false);
-        homeButton.SetActive(false);
-        Time.timeScale=1f;
-        bird.enabled=true;
-        bird.ResetBird();
-        obj_mover[] env= FindObjectsByType<obj_mover>();
-        for(int i = 0; i < env.Length; i++)
-        {
-            Destroy(env[i].gameObject);
-        }
-        CloudFade[] fades=  FindObjectsByType<CloudFade>();
-        for(int i = 0; i < fades.Length; i++)
-        {
-            Destroy(fades[i].gameObject);
-        }
-        soundManager.PlayMusic();
+        StartCoroutine(PlaySequence());
     }
     public void Pause(){
+        bird.paused=true;
         soundManager.StopMusic();
         Time.timeScale=0f;
-        bird.enabled=false;
         homeButton.SetActive(false);
     }
 
@@ -77,7 +63,9 @@ public class GameManager : MonoBehaviour
 
     IEnumerator GameOverSequence()
     {
-        yield return new WaitForSecondsRealtime(0.8f);
+        yield return new WaitForSecondsRealtime(0.4f);
+        bird.Fade();
+        yield return new WaitForSecondsRealtime(0.4f);
         bird.gameObject.SetActive(false);
         ExplodePlayer();
         soundManager.PlayExplosion();
@@ -87,11 +75,43 @@ public class GameManager : MonoBehaviour
         playButton.SetActive(true);
         homeButton.SetActive(true);
     }
+    IEnumerator PlaySequence()
+    {
+        obj_mover[] env= FindObjectsByType<obj_mover>();
+        for(int i = 0; i < env.Length; i++)
+        {
+            Destroy(env[i].gameObject);
+        }
+        CloudFade[] fades=  FindObjectsByType<CloudFade>();
+        for(int i = 0; i < fades.Length; i++){
+            Destroy(fades[i].gameObject);
+        }
+        bird.enabled=true;
+        bird.ResetBird();
+        bird.paused=true;
+        gameOverImg.SetActive(false);
+        playButton.SetActive(false);
+        homeButton.SetActive(false);
+        bird.gameObject.SetActive(true);
+        if (!firstSpawn) {
+            bird.FadeSpawn();
+        }
+        Score=0;
+        score.text=Score.ToString();
+        if (!firstSpawn) {
+            yield return new WaitForSecondsRealtime(0.9f);
+        }
+        firstSpawn=false;
+        bird.paused=false;
+        Time.timeScale=1f;
+        soundManager.PlayMusic();
+    }
 
     private void ExplodePlayer(){
         Vector3 pos = bird.transform.position;
         explosion.transform.position=pos;
-        explosion.Play();
+        explosion.transform.localScale=bird.transform.localScale*15;
+        explosion.Explode();
     }
 
     void Update() {

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2281802231337682044}
   m_Layer: 0
   m_Name: birdjumpcloud
-  m_TagString: Untagged
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -104,3 +104,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ed9225d11d11284c9c9f3cb4aad0339, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  fadeDuration: 1.5
+  speed: 6

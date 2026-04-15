@@ -6799,6 +6799,7 @@ MonoBehaviour:
   fadeController: {fileID: 1646100549}
   scale: 0.08
   healthWarpTime: 1
+  active: 1
 --- !u!58 &1646100545
 CircleCollider2D:
   m_ObjectHideFlags: 0
