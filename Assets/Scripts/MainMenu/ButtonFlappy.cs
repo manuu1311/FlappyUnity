@@ -19,6 +19,8 @@ public class ButtonFlappy : MonoBehaviour,IPointerEnterHandler,IPointerExitHandl
     public void OnPointerExit(PointerEventData eventData){
         shell1.Stop();
         shell2.Stop();
+        shell1.Clear();
+        shell2.Clear();
         if(coroutine!=null){
             StopCoroutine(coroutine);
         }

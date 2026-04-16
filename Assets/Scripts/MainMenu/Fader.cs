@@ -1,10 +1,5 @@
-using Microsoft.Unity.VisualStudio.Editor;
 using UnityEngine;
 using System.Collections;
-using UnityEngine.InputSystem;
-using System;
-using Unity.Mathematics;
-using UnityEditor.ShaderGraph.Internal;
 
 public class Fader : MonoBehaviour
 {

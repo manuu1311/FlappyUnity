@@ -81,7 +81,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator GameOverSequence()
     {
-        yield return new WaitForSecondsRealtime(0.4f);
+        yield return new WaitForSecondsRealtime(0.7f);
         bird.Fade(fadeTimeDeath);
         //soundManager.FadeEffect();
         yield return new WaitForSecondsRealtime(0.4f);

@@ -1,8 +1,9 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SceneFlappyManager : MonoBehaviour
 {
     public void MainMenu() {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");   
+        SceneManager.LoadScene("MainMenu",LoadSceneMode.Single);   
     }
 }

@@ -11,8 +11,10 @@ public class SceneChangeManager : MonoBehaviour
         StartCoroutine(FlappySequence());
     }
     IEnumerator FlappySequence() {
+        Debug.Log("starting animation");
         controller.StartAnim();
         yield return new WaitForSeconds(2.5f);
+        Debug.Log("fading");
         fader.FadeOut(fadeTime);
         yield return new WaitForSeconds(fadeTime+0.5f);
         UnityEngine.SceneManagement.SceneManager.LoadScene("Flappy");

@@ -39049,13 +39049,13 @@ ParticleSystem:
     serializedVersion: 6
     enabled: 1
     type: 4
-    angle: 0
+    angle: 1
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
     radiusThickness: 1
     donutRadius: 0.2
-    m_Position: {x: 0, y: 0, z: 0}
-    m_Rotation: {x: -100, y: 0, z: 0}
+    m_Position: {x: -13.083042, y: 0.00000038755456, z: 0}
+    m_Rotation: {x: 298.04358, y: 109.33041, z: 248.32436}
     m_Scale: {x: 25.595345, y: 20, z: 0.9999932}
     placementMode: 0
     m_MeshMaterialIndex: 0
@@ -39254,7 +39254,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.6
+      scalar: 0.8
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -41073,8 +41073,8 @@ ParticleSystem:
     strength:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 5
-      minScalar: -5
+      scalar: 2
+      minScalar: 5
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -41126,8 +41126,8 @@ ParticleSystem:
     strengthY:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 3
-      minScalar: 3
+      scalar: 0
+      minScalar: 0
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -41230,7 +41230,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     separateAxes: 1
-    frequency: 0.02
+    frequency: 0.05
     damping: 1
     octaves: 1
     octaveMultiplier: 0.5
@@ -49117,8 +49117,8 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 10
-      minScalar: 7
+      scalar: 20
+      minScalar: 14
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -49613,13 +49613,13 @@ ParticleSystem:
     serializedVersion: 6
     enabled: 1
     type: 4
-    angle: 0
+    angle: 1
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
     radiusThickness: 1
     donutRadius: 0.2
-    m_Position: {x: 0, y: 0, z: 0}
-    m_Rotation: {x: -100, y: 0, z: 0}
+    m_Position: {x: 26.558945, y: -0.000001263214, z: 0}
+    m_Rotation: {x: 310.1903, y: 257.9523, z: 105.60981}
     m_Scale: {x: 25.595345, y: 20, z: 0.9999932}
     placementMode: 0
     m_MeshMaterialIndex: 0
@@ -49818,7 +49818,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.6
+      scalar: 0.8
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -51637,8 +51637,8 @@ ParticleSystem:
     strength:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 5
-      minScalar: -5
+      scalar: -5
+      minScalar: 2
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -51690,8 +51690,8 @@ ParticleSystem:
     strengthY:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 3
-      minScalar: 3
+      scalar: 0
+      minScalar: 0
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -51794,7 +51794,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     separateAxes: 1
-    frequency: 0.02
+    frequency: 0.05
     damping: 1
     octaves: 1
     octaveMultiplier: 0.5

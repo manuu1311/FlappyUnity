@@ -18,8 +18,6 @@ public class SoundClass : MonoBehaviour
 
     public void PlaySound(AudioClip clip) {
         StackTrace stackTrace = new StackTrace();
-        UnityEngine.Debug.Log(stackTrace.ToString());
-        UnityEngine.Debug.Log(clip);
         src.PlayOneShot(clip);
     }
 }

@@ -11,9 +11,11 @@ public class UI : MonoBehaviour
     public ParticleSystem particles;
 
     void Awake() {
-        particles.Play();
-    }
+    Debug.Log("MENU AWAKE");
+}
     void Start() {
+        Debug.Log("MENU START");
+        particles.Play();
         Application.targetFrameRate=60;
         BackButton(false);
     }
