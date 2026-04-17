@@ -1,2 +1,3 @@
-# Unity_2d_collection
-Learning and testing experiments in simple unity games
+# Flappy Unity
+Learning and experimenting with unity in Flappy Bird.  
+
