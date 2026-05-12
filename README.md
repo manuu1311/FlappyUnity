@@ -1,7 +1,7 @@
 ## Flappy Unity
 # Flappy bird implementation in Unity
 This is my first game in Unity, and I used it to experiment with different features, like particle systems and shaders.  
-In this game, you have to jump to avoid pipes and  prevent falling down, but you also have to eat, otherwise you will starve! You can also warp forward to dodge obstacles, using "Z". Reach 100 points to unlock the ending scene. 
+In this game, you have to jump to avoid pipes and  prevent falling down, but you also have to eat, otherwise you will starve! Warp forward to dodge obstacles using "Z". Reach 100 points to unlock the ending scene. 
 
 ## Gameplay
 Main menu
